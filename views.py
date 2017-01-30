@@ -25,11 +25,12 @@ def login_required(test):
 
 
 # route handlers
-@app.route('logout/')
+@app.route('/logout')
 def logout():
     session.pop('logged_in', None)
     flash('Goodbye!')
     return redirect(url_for('login'))
+
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
