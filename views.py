@@ -22,11 +22,11 @@ def login_required(test):
             return test(*args, **kwargs)
         else:
             flash('You need to login first!')
-        return wrap
+    return wrap
 
 
 # route handlers
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     session.pop('logged_in', None)
     flash('Goodbye!')
@@ -47,7 +47,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/tasks')
+@app.route('/tasks/')
 @login_required
 def tasks():
     g.db = connect_db()
@@ -64,7 +64,7 @@ def tasks():
                            closed_tasks=closed_tasks)
 
 
-@app.route('/add', methods=['POST'])
+@app.route('/add/', methods=['POST'])
 @login_required
 def new_task():
     g.db = connect_db()
@@ -107,12 +107,3 @@ def delete_entry(task_id):
     g.db.close()
     flash('The task was deleted.')
     return redirect(url_for('tasks'))
-
-
-
-
-
-
-
-
-
